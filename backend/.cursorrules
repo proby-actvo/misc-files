@@ -1,0 +1,112 @@
+# Project Guidelines and Best Practices
+
+## AI Assistant Guidelines
+### Interaction Style
+- Prioritize code solutions that match our existing patterns
+- Provide explanations that reference our project structure
+- When suggesting new approaches, explain why they're better than current patterns
+- Be concise in explanations but thorough in code examples
+
+### Code Generation
+- Follow all style guidelines mentioned in this document
+- Include type hints in all generated code
+- Add docstrings to all functions and classes
+- Prefer async patterns when dealing with I/O operations
+- Include error handling in suggested implementations
+- Comment complex logic or non-obvious solutions
+
+### Problem Solving
+- Ask clarifying questions before providing complex solutions
+- Suggest test cases along with implementation code
+- Reference similar existing code in the project when relevant
+- Provide multiple approaches for complex problems with trade-offs
+- Consider performance implications for database operations
+
+### Documentation
+- Format responses using markdown
+- Use code blocks with appropriate language tags
+- Include examples when explaining concepts
+- Link to relevant documentation when introducing new libraries or patterns
+- Structure explanations with clear headings and bullet points
+
+
+## Development Standards
+### Python
+- Code should be clean, efficient, and maintainable
+- Favor readability and simplicity over clever solutions
+- Ask clarifying questions
+- Follow PEP 8 style guide
+- Use descriptive variable and function names
+- Add docstrings to all classes and functions using """triple quotes"""
+- Include type hints for all function parameters and return values
+- Maximum line length: 100 characters
+
+## Technology Stack
+### Core
+- Python 3.12
+- Main Packages: 
+    - pydantic 2
+    - fastapi 
+    - sqlalchemy 2
+    - alembic for database migrations
+
+### Dependencies
+- see the file requirements/develop.txt
+- see the file requirements/deploy.txt
+
+## Architecture
+### Project Structure
+- Models in app/models/
+- Schemas in app/schemas/
+- Repositories in app/repositories/
+- Routes & endpoints in app/api/
+- Database config in app/db/
+- Tests in app/tests/
+
+## SQLAlchemy Conventions
+- Use declarative models with type hints (Mapped[Type])
+- Include explicit table and column names
+- Define indexes in __table_args__
+- Use relationship() with back_populates
+- Add foreign key constraints explicitly with cascading deletes
+- Include TimestampMixin for created_at/updated_at
+
+### FastAPI Patterns
+- Use Pydantic v2 models for request/response schemas
+- Implement dependency injection for database sessions
+- Use async/await for all database operations
+- Structure routes with proper HTTP methods and status codes
+- Include response_model in route decorators
+- Handle exceptions with HTTPException
+
+## Quality Assurance
+### Testing
+- Write pytest tests for everything
+- Use pytest-asyncio for async tests
+- Look to use app/test/data.py for test data
+- Look at tests in the same directory for inspiration
+- Use freezegun for time-based tests
+
+### Error Handling & Logging
+- Use proper logging levels (ERROR, WARNING, INFO, DEBUG)
+- Handle exceptions gracefully with try/except
+- Log all critical operations and errors
+- Include correlation IDs in logs
+- Use structured logging format
+
+### Performance
+- Implement caching where appropriate
+- Use async operations for I/O
+- Index frequently queried columns
+- Optimize database queries
+- Use connection pooling
+
+## Other
+- when writing REPL code or other code that is not part of the project, this is how to get a db session:
+```python
+from app.database.database import session_manager
+
+async with session_manager.begin_session() as db_session:
+    # do stuff
+```
+- when writing tests do NOT tag the test with @pytest.mark.asyncio

@@ -2,6 +2,9 @@
 
 # Define all copy operations as source:destination pairs
 operations=(
+    # Frontend files
+    "../frontend/.cursorrules:frontend/.cursorrules"
+
     # Backend files
     "../backend/.cursorrules:backend/.cursorrules"
 

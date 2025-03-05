@@ -110,3 +110,4 @@ async with session_manager.begin_session() as db_session:
     # do stuff
 ```
 - when writing tests do NOT tag the test with @pytest.mark.asyncio
+- when writing tests make liberal use of @pytest.fixture to create test data

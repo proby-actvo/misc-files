@@ -1,0 +1,7 @@
+## Project structure
+This is a vue 3 project using typescript
+Look at `project.json` in the root for project info
+
+## Testing
+Mock HTTP calls
+Look at tests in the same directory for inspiration of how to write tests for the new code
